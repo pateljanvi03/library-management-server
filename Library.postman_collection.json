@@ -136,6 +136,117 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Branch",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"ME\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/branches",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"branches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/branches",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"branches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/branches/633cbb674b46862d1cc504fa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"branches",
+								"633cbb674b46862d1cc504fa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"EC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/branches/633cbc0d4b46862d1cc504fc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"branches",
+								"633cbc0d4b46862d1cc504fc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/branches/633cbb674b46862d1cc504fa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"branches",
+								"633cbb674b46862d1cc504fa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

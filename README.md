@@ -1,6 +1,6 @@
-# Express ES2017 REST API Boilerplate
+# Library Management System Server
 
-Boilerplate/Generator/Starter Project for building RESTful APIs and microservices using Node.js, Express and MongoDB
+Backend project for Library Management System built using Node.js, Express and MongoDB
 
 ## Requirements
 
@@ -12,8 +12,8 @@ Boilerplate/Generator/Starter Project for building RESTful APIs and microservice
 #### Clone the repo and make it yours:
 
 ```bash
-git clone --depth 1 https://github.com/pateljanvi03/restaurant-order-system-server
-cd restaurant-order-system-server
+git clone --depth 1 https://github.com/pateljanvi03/library-management-server
+cd library-management-server
 ```
 
 #### Install dependencies:
@@ -53,7 +53,7 @@ yarn lint:fix
 yarn lint:watch
 ```
 
-## Boilderplate
+## Boilerplate Used from
 
 - [KunalKapadia/express-mongoose-es6-rest-api](https://github.com/danielfsousa/express-rest-boilerplate)
 

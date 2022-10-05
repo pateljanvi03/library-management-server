@@ -19,7 +19,7 @@ router.route("/").get(list).post(validate(createCategory), create);
 router
   .route("/:categoryId")
   .get(get)
-  .put(validate(createCategory), update)
+  .put(update) // @todo - add validation
   .delete(remove);
 
 module.exports = router;

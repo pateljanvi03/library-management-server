@@ -19,7 +19,7 @@ router.route("/").get(list).post(validate(createBranch), create);
 router
   .route("/:branchId")
   .get(get)
-  .put(validate(createBranch), update)
+  .put(update) // @todo - add validation
   .delete(remove);
 
 module.exports = router;

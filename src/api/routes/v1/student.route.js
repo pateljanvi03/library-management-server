@@ -19,7 +19,7 @@ router.route("/").get(list).post(validate(createStudent), create);
 router
   .route("/:studentId")
   .get(get)
-  .put(validate(createStudent), update)
+  .put(update) // @todo - add validation
   .delete(remove);
 
 module.exports = router;

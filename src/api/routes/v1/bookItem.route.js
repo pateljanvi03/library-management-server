@@ -19,7 +19,7 @@ router.route("/").get(list).post(validate(createBookItem), create);
 router
   .route("/:bookItemId")
   .get(get)
-  .put(validate(createBookItem), update)
+  .put(update) // @todo - add validation
   .delete(remove);
 
 module.exports = router;

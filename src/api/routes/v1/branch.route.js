@@ -16,6 +16,10 @@ router.param("branchId", load);
 
 router.route("/").get(list).post(validate(createBranch), create);
 
-router.route("/:branchId").get(get).put(update).delete(remove);
+router
+  .route("/:branchId")
+  .get(get)
+  .put(validate(createBranch), update)
+  .delete(remove);
 
 module.exports = router;

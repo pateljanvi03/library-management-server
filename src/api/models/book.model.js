@@ -1,51 +1,50 @@
-const { number } = require('joi');
-const mongoose = require('mongoose');
+const { number } = require("joi");
+const mongoose = require("mongoose");
 
 const Book = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     ISBN: {
       type: String,
-      required: true
+      required: true,
     },
     image: {
-      type: String
+      type: String,
     },
     categoryId: {
-      type: String,
       required: true,
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Book"
+      ref: "Book",
     },
     author: {
-      type: String
+      type: String,
     },
     language: {
-      type: String
+      type: String,
     },
     publisher: {
-      type: String
+      type: String,
     },
     publicationYear: {
-      type: Number
+      type: Number,
     },
-    price : {
-      type: Number
+    price: {
+      type: Number,
     },
     description: {
-      type: String
+      type: String,
     },
-    quantity:{
+    quantity: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
-module.exports = mongoose.model('Book', Book);
+module.exports = mongoose.model("Book", Book);

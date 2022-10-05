@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
-const httpStatus = require('http-status');
-const { omitBy, isNil } = require('lodash');
-const bcrypt = require('bcryptjs');
-const dayjs = require('dayjs');
-const jwt = require('jsonwebtoken');
-const APIError = require('../errors/api-error');
-const { env, jwtSecret, jwtExpirationInterval } = require('../../config/vars');
+const mongoose = require("mongoose");
+const httpStatus = require("http-status");
+const { omitBy, isNil } = require("lodash");
+const bcrypt = require("bcryptjs");
+const dayjs = require("dayjs");
+const jwt = require("jsonwebtoken");
+const APIError = require("../errors/api-error");
+const { env, jwtSecret, jwtExpirationInterval } = require("../../config/vars");
 
 /**
  * User Schema
@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 /**
@@ -45,11 +45,11 @@ const userSchema = new mongoose.Schema(
  * - validations
  * - virtuals
  */
-userSchema.pre('save', async function save(next) {
+userSchema.pre("save", async function save(next) {
   try {
-    if (!this.isModified('password')) return next();
+    if (!this.isModified("password")) return next();
 
-    const rounds = env === 'test' ? 1 : 10;
+    const rounds = env === "test" ? 1 : 10;
 
     const hash = await bcrypt.hash(this.password, rounds);
     this.password = hash;
@@ -66,7 +66,7 @@ userSchema.pre('save', async function save(next) {
 userSchema.method({
   transform() {
     const transformed = {};
-    const fields = ['id', 'name', 'username', 'createdAt'];
+    const fields = ["id", "name", "username", "createdAt"];
 
     fields.forEach((field) => {
       transformed[field] = this[field];
@@ -77,7 +77,7 @@ userSchema.method({
 
   token() {
     const payload = {
-      exp: dayjs().add(jwtExpirationInterval, 'minutes').unix(),
+      exp: dayjs().add(jwtExpirationInterval, "minutes").unix(),
       iat: dayjs().unix(),
       sub: this._id,
     };
@@ -110,7 +110,7 @@ userSchema.statics = {
     }
 
     throw new APIError({
-      message: 'User does not exist',
+      message: "User does not exist",
       status: httpStatus.NOT_FOUND,
     });
   },
@@ -125,7 +125,7 @@ userSchema.statics = {
     const { email, password, refreshObject } = options;
     if (!email) {
       throw new APIError({
-        message: 'An email is required to generate a token',
+        message: "An email is required to generate a token",
       });
     }
 
@@ -137,15 +137,15 @@ userSchema.statics = {
       if (user && (await user.passwordMatches(password))) {
         return { user, accessToken: user.token() };
       }
-      err.message = 'Incorrect email or password';
+      err.message = "Incorrect email or password";
     } else if (refreshObject && refreshObject.userEmail === email) {
       if (dayjs(refreshObject.expires).isBefore()) {
-        err.message = 'Invalid refresh token.';
+        err.message = "Invalid refresh token.";
       } else {
         return { user, accessToken: user.token() };
       }
     } else {
-      err.message = 'Incorrect email or refreshToken';
+      err.message = "Incorrect email or refreshToken";
     }
     throw new APIError(err);
   },
@@ -157,9 +157,7 @@ userSchema.statics = {
    * @param {number} limit - Limit number of users to be returned.
    * @returns {Promise<User[]>}
    */
-  list({
-    page = 1, perPage = 10, name, email,
-  }) {
+  list({ page = 1, perPage = 10, name, email }) {
     const options = omitBy({ name, email }, isNil);
 
     return this.find(options)
@@ -173,4 +171,4 @@ userSchema.statics = {
 /**
  * @typedef User
  */
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);

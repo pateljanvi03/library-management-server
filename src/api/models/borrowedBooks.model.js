@@ -1,43 +1,43 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const BorrowedBooks = new mongoose.Schema(
   {
     bookItemId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "BookItem"
+      ref: "BookItem",
     },
     studentId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Student"
+      ref: "Student",
     },
     issueDate: {
-      type: String
+      type: String,
     },
     dueDate: {
-      type: String
+      type: String,
     },
     returnDate: {
-      type: String
+      type: String,
     },
     status: {
       type: String,
-      enum: [ 'borrowed', "returned"]
+      enum: ["borrowed", "returned"],
     },
     issuerUserId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
     },
     collecterUserId: {
       typoe: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
     },
     fineAmount: {
-      type: Number
-    }
+      type: Number,
+    },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
-module.exports = mongoose.model('BorrowedBooks', BorrowedBooks);
+module.exports = mongoose.model("BorrowedBooks", BorrowedBooks);

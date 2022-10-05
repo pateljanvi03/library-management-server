@@ -1,37 +1,41 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Student = new mongoose.Schema(
   {
     name: {
-      type: String
+      type: String,
+      required: true,
     },
     branch: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Branch"
+      ref: "Branch",
+      required: true,
     },
     enrollmentNumber: {
-      type: Number
+      type: Number,
+      unique: true,
+      required: true,
     },
     phone: {
-      type: String
+      type: String,
     },
     email: {
-      type: String
+      type: String,
     },
     isActive: {
       type: Boolean,
-      default: true
+      default: true,
     },
     batch: {
-      type: Number
+      type: Number,
     },
     address: {
-      type: String
-    }
+      type: String,
+    },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
-module.exports = mongoose.model('Student', Student);
+module.exports = mongoose.model("Student", Student);

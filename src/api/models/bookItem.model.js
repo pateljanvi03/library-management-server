@@ -1,22 +1,22 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const BookItem = new mongoose.Schema(
   {
     bookId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Book"
+      ref: "Book",
     },
     status: {
       type: String,
-      enum: [ 'borrowed', 'returned' ]
+      enum: ["borrowed", "returned"],
     },
     shelf: {
-      type: String
-    }
+      type: String,
+    },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
-module.exports = mongoose.model('BookItem', BookItem);
+module.exports = mongoose.model("BookItem", BookItem);

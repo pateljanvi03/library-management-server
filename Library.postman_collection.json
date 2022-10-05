@@ -247,6 +247,339 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"hgfryg\",\r\n    \"ISBN\": \"3673ge736764\",\r\n    \"image\": \"yes\",\r\n    \"categoryId\": \"633c8d3940135f35e88db88e\",\r\n    \"author\": \"wdgfuiy\",\r\n    \"language\": \"English\",\r\n    \"publisher\": \"Penguin Random House\",\r\n    \"publicationYear\": 2000,\r\n    \"price\": 100,\r\n    \"description\": \"read and you will know\",\r\n    \"quantity\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/books",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/books",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/books/633dd30e8b794c40808765d1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"books",
+								"633dd30e8b794c40808765d1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"yes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/books/633dd30e8b794c40808765d1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"books",
+								"633dd30e8b794c40808765d1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/books/633dd30e8b794c40808765d1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"books",
+								"633dd30e8b794c40808765d1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BookItem",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookId\":\"633dd2cd8b794c40808765cf\",\r\n    \"status\":\"borrowed\",\r\n    \"shelf\":\"B\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/bookItems",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bookItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bookitems",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bookitems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bookItems/633de0a9e6caae0db47d6f0b",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bookItems",
+								"633de0a9e6caae0db47d6f0b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"shelf\": \"B\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/bookItems/633de0a9e6caae0db47d6f0b",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bookItems",
+								"633de0a9e6caae0db47d6f0b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/bookItems/633de0a9e6caae0db47d6f0b",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bookItems",
+								"633de0a9e6caae0db47d6f0b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ami\",\r\n    \"branch\": \"633cbcb94b46862d1cc50502\",\r\n    \"enrollmentNumber\": 200200107029,\r\n    \"phone\": \"764788667975\",\r\n    \"email\": \"eaeyujgh@gmail.com\",\r\n    \"isActive\": true,\r\n    \"batch\": 2020,\r\n    \"address\": \"324,gklrj,wrh82yi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/students",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/students",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/students/633deb0e348eb80498271625",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"students",
+								"633deb0e348eb80498271625"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Manu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/students/633deb0e348eb80498271625",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"students",
+								"633deb0e348eb80498271625"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/students/633deb0e348eb80498271625",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"students",
+								"633deb0e348eb80498271625"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

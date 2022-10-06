@@ -28,7 +28,7 @@ const BorrowedBooks = new mongoose.Schema(
       ref: "User",
     },
     collecterUserId: {
-      typoe: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
     fineAmount: {

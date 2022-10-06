@@ -6,6 +6,7 @@ const branchRouter = require("./branch.route");
 const bookRouter = require("./book.route");
 const bookItemRouter = require("./bookItem.route");
 const studentRouter = require("./student.route");
+const borrowedBookRouter = require("./borrowedBooks.route");
 
 const router = express.Router();
 
@@ -24,5 +25,6 @@ router.use("/branches", branchRouter);
 router.use("/books", bookRouter);
 router.use("/bookItems", bookItemRouter);
 router.use("/students", studentRouter);
+router.use("/borrowedBooks", borrowedBookRouter);
 
 module.exports = router;

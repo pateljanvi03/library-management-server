@@ -580,6 +580,63 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "BorrowedBook",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookItemId\": \"633de0eae6caae0db47d6f0f\",\r\n    \"studentId\": \"633df59927efde1c64aa8c48\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/borrowedBooks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"borrowedBooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookItemId\": \"633de0eae6caae0db47d6f0f\",\r\n    \"studentId\": \"633df59927efde1c64aa8c48\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/borrowedBooks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"borrowedBooks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

@@ -15,7 +15,7 @@ module.exports = {
   createUser: {
     body: {
       username: Joi.string().required(),
-      password: Joi.string().min(6).max(128).required(),
+      password: Joi.string().required(),
       name: Joi.string().max(128),
     },
   },
@@ -24,7 +24,7 @@ module.exports = {
   replaceUser: {
     body: {
       username: Joi.string().required(),
-      password: Joi.string().min(6).max(128).required(),
+      password: Joi.string().required(),
       name: Joi.string().max(128),
     },
     params: {

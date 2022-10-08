@@ -1,6 +1,10 @@
 const express = require("express");
 const validate = require("express-validation");
-const { create, update } = require("../../controllers/borrowedBook.controller");
+const {
+  create,
+  update,
+  list,
+} = require("../../controllers/borrowedBook.controller");
 const {
   createBorrowedBook,
   updateBorrowedBook,
@@ -10,6 +14,7 @@ const router = express.Router();
 
 router
   .route("/")
+  .get(list)
   .post(validate(createBorrowedBook), create)
   .put(validate(updateBorrowedBook), update);
 

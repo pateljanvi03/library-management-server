@@ -1,4 +1,4 @@
-const { number } = require("joi");
+const { number, optional } = require("joi");
 const mongoose = require("mongoose");
 
 const Book = new mongoose.Schema(
@@ -46,5 +46,28 @@ const Book = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+Book.statics = {
+  list(filterQuery) {
+    const options = {};
+    if (filterQuery.title) {
+      options.title = { $regex: filterQuery.title };
+    }
+    if (filterQuery.ISBN) {
+      options.ISBN = filterQuery.ISBN;
+    }
+    if (filterQuery.author) {
+      options.author = { $regex: filterQuery.author };
+    }
+
+    const page = parseInt(filterQuery.page) || 1;
+    const limit = parseInt(filterQuery.limit) || 5;
+
+    return this.find(options)
+      .sort({ createdAt: -1 })
+      .skip(limit * (page - 1))
+      .limit(limit);
+  },
+};
 
 module.exports = mongoose.model("Book", Book);

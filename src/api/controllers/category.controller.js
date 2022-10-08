@@ -28,7 +28,7 @@ exports.get = (req, res, next) => {
 
 exports.list = async (req, res, next) => {
   try {
-    const categories = await Category.find();
+    const categories = await Category.find(req.query);
     return res.json({ categories });
   } catch (error) {
     return next(error);

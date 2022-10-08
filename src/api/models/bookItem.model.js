@@ -19,4 +19,24 @@ const BookItem = new mongoose.Schema(
   }
 );
 
+BookItem.statics = {
+  list(filterQuery) {
+    const options = {};
+    if (filterQuery.bookId) {
+      options.bookId = filterQuery.bookId;
+    }
+    if (filterQuery.shelf) {
+      options.shelf = filterQuery.shelf;
+    }
+
+    const page = parseInt(filterQuery.page) || 1;
+    const limit = parseInt(filterQuery.limit) || 5;
+
+    return this.find(options)
+      .sort({ createdAt: -1 })
+      .skip(limit * (page - 1))
+      .limit(limit);
+  },
+};
+
 module.exports = mongoose.model("BookItem", BookItem);

@@ -24,7 +24,7 @@ exports.get = (req, res, next) => {
 
 exports.list = async (req, res, next) => {
   try {
-    const bookItems = await BookItem.find();
+    const bookItems = await BookItem.list(req.query);
     return res.json({ bookItems });
   } catch (error) {
     return next(error);

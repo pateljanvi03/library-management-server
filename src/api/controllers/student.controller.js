@@ -23,7 +23,7 @@ exports.get = (req, res, next) => {
 
 exports.list = async (req, res, next) => {
   try {
-    const students = await Student.find();
+    const students = await Student.list(req.query);
     return res.json({ students });
   } catch (error) {
     return next(error);

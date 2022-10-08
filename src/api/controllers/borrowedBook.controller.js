@@ -7,6 +7,15 @@ const borrowedBookStatus = {
   RETURNED: "returned",
 };
 
+exports.list = async (req, res, next) => {
+  try {
+    const borrowedBooks = await BorrowedBook.list(req.query);
+    return res.json({ borrowedBooks });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 exports.create = async (req, res, next) => {
   try {
     const bookItem = await BookItem.findById(req.body.bookItemId);

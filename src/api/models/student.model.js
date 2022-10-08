@@ -38,4 +38,30 @@ const Student = new mongoose.Schema(
   }
 );
 
+Student.statics = {
+  list(filterQuery) {
+    const options = {};
+    if (filterQuery.enrollmentNumber) {
+      options.enrollmentNumber = filterQuery.enrollmentNumber;
+    }
+    if (filterQuery.name) {
+      options.name = { $regex: filterQuery.name };
+    }
+    if (filterQuery.branch) {
+      options.branch = filterQuery.branch;
+    }
+    if (filterQuery.batch) {
+      options.batch = filterQuery.batch;
+    }
+
+    const page = parseInt(filterQuery.page) || 1;
+    const limit = parseInt(filterQuery.limit) || 5;
+
+    return this.find(options)
+      .sort({ createdAt: -1 })
+      .skip(limit * (page - 1))
+      .limit(limit);
+  },
+};
+
 module.exports = mongoose.model("Student", Student);

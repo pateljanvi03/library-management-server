@@ -24,7 +24,7 @@ exports.get = (req, res, next) => {
 
 exports.list = async (req, res, next) => {
   try {
-    const branches = await Branch.find();
+    const branches = await Branch.list(req.query);
     return res.json({ branches });
   } catch (error) {
     return next(error);

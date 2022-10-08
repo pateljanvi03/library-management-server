@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const { omit } = require('lodash');
-const User = require('../models/user.model');
+const httpStatus = require("http-status");
+const { omit } = require("lodash");
+const User = require("../models/user.model");
 
 /**
  * Load user and append to req.
@@ -9,7 +9,7 @@ const User = require('../models/user.model');
 exports.load = async (req, res, next, id) => {
   try {
     const user = await User.get(id);
-    req.locals = { user };
+    req.user = user;
     return next();
   } catch (error) {
     return next(error);
@@ -20,7 +20,7 @@ exports.load = async (req, res, next, id) => {
  * Get user
  * @public
  */
-exports.get = (req, res) => res.json(req.locals.user.transform());
+exports.get = (req, res) => res.json(req.user.transform());
 
 /**
  * Get logged in user info
@@ -36,10 +36,9 @@ exports.create = async (req, res, next) => {
   try {
     const user = new User(req.body);
     const savedUser = await user.save();
-    res.status(httpStatus.CREATED);
-    res.json(savedUser.transform());
+    res.json({ user: savedUser.transform() });
   } catch (error) {
-    next(User.checkDuplicateEmail(error));
+    next(error);
   }
 };
 
@@ -47,15 +46,16 @@ exports.create = async (req, res, next) => {
  * Update existing user
  * @public
  */
-exports.update = (req, res, next) => {
-  const ommitId = '_id';
-  const updatedUser = omit(req.body, ommitId);
+exports.update = async (req, res, next) => {
+  try {
+    const ommitId = "_id";
+    const updatedUser = omit(req.body, ommitId);
 
-  req.locals.user = updatedUser;
-
-  req.locals.save()
-    .then((savedUser) => res.json(savedUser.transform()))
-    .catch((e) => next(User.checkDuplicateEmail(e)));
+    const savedUser = await req.user.updateOne(updatedUser);
+    return res.json({ success: true });
+  } catch (error) {
+    next(error);
+  }
 };
 
 /**
@@ -66,7 +66,7 @@ exports.list = async (req, res, next) => {
   try {
     const users = await User.list(req.query);
     const transformedUsers = users.map((user) => user.transform());
-    res.json(transformedUsers);
+    res.json({ users: transformedUsers });
   } catch (error) {
     next(error);
   }
@@ -76,10 +76,11 @@ exports.list = async (req, res, next) => {
  * Delete user
  * @public
  */
-exports.remove = (req, res, next) => {
-  const { user } = req.locals;
-
-  user.remove()
-    .then(() => res.status(httpStatus.NO_CONTENT).end())
-    .catch((e) => next(e));
+exports.remove = async (req, res, next) => {
+  try {
+    await req.user.delete();
+    return res.json({ success: true });
+  } catch (error) {
+    return next(error);
+  }
 };

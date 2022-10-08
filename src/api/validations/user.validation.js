@@ -1,4 +1,4 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
 module.exports = {
   // GET /v1/users
@@ -14,7 +14,7 @@ module.exports = {
   // POST /v1/users
   createUser: {
     body: {
-      email: Joi.string().email().required(),
+      username: Joi.string().required(),
       password: Joi.string().min(6).max(128).required(),
       name: Joi.string().max(128),
     },
@@ -23,7 +23,7 @@ module.exports = {
   // PUT /v1/users/:userId
   replaceUser: {
     body: {
-      email: Joi.string().email().required(),
+      username: Joi.string().required(),
       password: Joi.string().min(6).max(128).required(),
       name: Joi.string().max(128),
     },

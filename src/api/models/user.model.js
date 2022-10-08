@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      match: /^\S+@\S+\.\S+$/,
       required: true,
       unique: true,
       trim: true,

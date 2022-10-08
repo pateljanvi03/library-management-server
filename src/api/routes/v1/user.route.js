@@ -2,12 +2,7 @@ const express = require("express");
 const validate = require("express-validation");
 const controller = require("../../controllers/user.controller");
 const { authorize, ADMIN, LOGGED_USER } = require("../../middlewares/auth");
-const {
-  listUsers,
-  createUser,
-  replaceUser,
-  updateUser,
-} = require("../../validations/user.validation");
+const { createUser, updateUser } = require("../../validations/user.validation");
 
 const router = express.Router();
 
@@ -16,12 +11,14 @@ const router = express.Router();
  */
 router.param("userId", controller.load);
 
-// router
-//   .route('/')
+router
+  .route("/")
+  .get(controller.list)
+  .post(validate(createUser), controller.create);
 
-// router.route('/profile')
-
-// router
-//   .route('/:userId')
+router
+  .route("/:userId")
+  .put(validate(updateUser), controller.update)
+  .delete(controller.remove);
 
 module.exports = router;

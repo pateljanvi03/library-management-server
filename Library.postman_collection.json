@@ -138,6 +138,138 @@
 			]
 		},
 		{
+			"name": "User",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John\",\r\n    \"username\": \"john\",\r\n    \"password\": \"john@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John\",\r\n    \"username\": \"john\",\r\n    \"password\": \"john@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/6340e49aeed0d345cc09164d",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"6340e49aeed0d345cc09164d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"test2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/6340e28089e43d3008a9cd5b",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"6340e28089e43d3008a9cd5b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"test2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/categories/633c8cc068423710bcf7df6f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"categories",
+								"633c8cc068423710bcf7df6f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Branch",
 			"item": [
 				{
@@ -172,12 +304,23 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/branches",
+							"raw": "{{url}}/branches?limit=1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"branches"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -283,12 +426,32 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/books",
+							"raw": "{{url}}/books?page=&limit=",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"books"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								},
+								{
+									"key": "limit",
+									"value": ""
+								},
+								{
+									"key": "title",
+									"value": "Tell me your dreams",
+									"disabled": true
+								},
+								{
+									"key": "ISBN",
+									"value": "3673ge736764",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -505,12 +668,33 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/students",
+							"raw": "{{url}}/students?batch=2020",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"students"
+							],
+							"query": [
+								{
+									"key": "enrollmentNumber",
+									"value": "200200107089",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Janvi",
+									"disabled": true
+								},
+								{
+									"key": "batch",
+									"value": "2020"
+								},
+								{
+									"key": "branch",
+									"value": "633cbc0d4b46862d1cc504fc",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -631,6 +815,46 @@
 							],
 							"path": [
 								"borrowedBooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/borrowedBooks?studentId=633df59927efde1c64aa8c48",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"borrowedBooks"
+							],
+							"query": [
+								{
+									"key": "studentId",
+									"value": "633df59927efde1c64aa8c48"
+								},
+								{
+									"key": "status",
+									"value": "borrowed",
+									"disabled": true
+								}
 							]
 						}
 					},

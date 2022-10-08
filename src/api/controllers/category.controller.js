@@ -18,7 +18,7 @@ exports.load = async (req, res, next, id) => {
   }
 };
 
-exports.get = (req, res) => {
+exports.get = (req, res, next) => {
   try {
     res.json({ category: req.category });
   } catch (error) {
@@ -26,7 +26,7 @@ exports.get = (req, res) => {
   }
 };
 
-exports.list = async (req, res) => {
+exports.list = async (req, res, next) => {
   try {
     const categories = await Category.find();
     return res.json({ categories });
@@ -35,7 +35,7 @@ exports.list = async (req, res) => {
   }
 };
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try {
     const category = await Category.create(req.body);
     return res.send({ category });
@@ -53,7 +53,7 @@ exports.update = async (req, res, next) => {
   }
 };
 
-exports.remove = async (req, res) => {
+exports.remove = async (req, res, next) => {
   try {
     await req.category.delete();
     return res.send({ success: true });

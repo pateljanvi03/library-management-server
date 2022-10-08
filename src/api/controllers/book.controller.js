@@ -13,7 +13,7 @@ exports.load = async (req, res, next, id) => {
   }
 };
 
-exports.get = async (req, res) => {
+exports.get = async (req, res, next) => {
   try {
     return res.json({ book: req.book });
   } catch (error) {
@@ -21,7 +21,7 @@ exports.get = async (req, res) => {
   }
 };
 
-exports.list = async (req, res) => {
+exports.list = async (req, res, next) => {
   try {
     const books = await Book.find();
     return res.json({ books });
@@ -30,7 +30,7 @@ exports.list = async (req, res) => {
   }
 };
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try {
     const book = await Book.create(req.body);
     return res.json({ book });
@@ -39,7 +39,7 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
   try {
     await req.book.updateOne(req.body);
     return res.json({ success: true });
@@ -48,7 +48,7 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.remove = async (req, res) => {
+exports.remove = async (req, res, next) => {
   try {
     await req.book.delete();
     return res.json({ success: true });

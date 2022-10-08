@@ -13,7 +13,7 @@ exports.load = async (req, res, next, id) => {
   }
 };
 
-exports.get = (req, res) => {
+exports.get = (req, res, next) => {
   try {
     return res.json({ student: req.student });
   } catch (error) {
@@ -21,7 +21,7 @@ exports.get = (req, res) => {
   }
 };
 
-exports.list = async (req, res) => {
+exports.list = async (req, res, next) => {
   try {
     const students = await Student.find();
     return res.json({ students });
@@ -39,7 +39,7 @@ exports.create = async (req, res, next) => {
   }
 };
 
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
   try {
     await req.student.update(req.body);
     return res.json({ success: true });

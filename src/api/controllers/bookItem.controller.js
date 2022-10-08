@@ -14,7 +14,7 @@ exports.load = async (req, res, next, id) => {
   }
 };
 
-exports.get = (req, res) => {
+exports.get = (req, res, next) => {
   try {
     return res.json({ bookItem: req.bookItem });
   } catch (error) {
@@ -22,7 +22,7 @@ exports.get = (req, res) => {
   }
 };
 
-exports.list = async (req, res) => {
+exports.list = async (req, res, next) => {
   try {
     const bookItems = await BookItem.find();
     return res.json({ bookItems });
@@ -31,7 +31,7 @@ exports.list = async (req, res) => {
   }
 };
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try {
     const bookItem = await BookItem.create(req.body);
     await Book.findOneAndUpdate(
@@ -44,7 +44,7 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
   try {
     await req.bookItem.updateOne(req.body);
     return res.json({ success: true });
@@ -53,7 +53,7 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.remove = async (req, res) => {
+exports.remove = async (req, res, next) => {
   try {
     await req.bookItem.delete();
     await Book.findOneAndUpdate(

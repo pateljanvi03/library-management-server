@@ -14,7 +14,7 @@ exports.load = async (req, res, next, id) => {
   }
 };
 
-exports.get = (req, res) => {
+exports.get = (req, res, next) => {
   try {
     res.json({ branch: req.branch });
   } catch (error) {
@@ -22,7 +22,7 @@ exports.get = (req, res) => {
   }
 };
 
-exports.list = async (req, res) => {
+exports.list = async (req, res, next) => {
   try {
     const branches = await Branch.find();
     return res.json({ branches });
@@ -31,7 +31,7 @@ exports.list = async (req, res) => {
   }
 };
 
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try {
     const branch = await Branch.create(req.body);
     return res.json({ branch });
@@ -40,7 +40,7 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {
+exports.update = async (req, res, next) => {
   try {
     await req.branch.updateOne(req.body);
     return res.send({ success: true });
@@ -49,7 +49,7 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.remove = async (req, res) => {
+exports.remove = async (req, res, next) => {
   try {
     await req.branch.delete();
     return res.send({ success: true });

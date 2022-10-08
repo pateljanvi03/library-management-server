@@ -1,4 +1,5 @@
 const BookItem = require("../models/bookItem.model");
+const Book = require("../models/book.model");
 
 exports.load = async (req, res, next, id) => {
   try {
@@ -33,6 +34,10 @@ exports.list = async (req, res) => {
 exports.create = async (req, res) => {
   try {
     const bookItem = await BookItem.create(req.body);
+    await Book.findOneAndUpdate(
+      { _id: req.body.bookId },
+      { $inc: { quantity: 1 } }
+    );
     return res.json({ bookItem });
   } catch (error) {
     return next(error);
@@ -51,6 +56,10 @@ exports.update = async (req, res) => {
 exports.remove = async (req, res) => {
   try {
     await req.bookItem.delete();
+    await Book.findOneAndUpdate(
+      { _id: req.bookItem.bookId },
+      { $inc: { quantity: -1 } }
+    );
     return res.json({ success: true });
   } catch (error) {
     return next(error);

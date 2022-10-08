@@ -8,7 +8,7 @@ exports.load = async (req, res, next, id) => {
   try {
     const category = await Category.findById(id);
     if (!category) {
-      return next(new Error('Invalid id'));
+      return next(new Error("Invalid id"));
     }
 
     req.category = category;
@@ -20,7 +20,7 @@ exports.load = async (req, res, next, id) => {
 
 exports.get = (req, res) => {
   try {
-    res.json(req.category)
+    res.json({ category: req.category });
   } catch (error) {
     return next(error);
   }
@@ -29,7 +29,7 @@ exports.get = (req, res) => {
 exports.list = async (req, res) => {
   try {
     const categories = await Category.find();
-    return res.json(categories);
+    return res.json({ categories });
   } catch (error) {
     return next(error);
   }

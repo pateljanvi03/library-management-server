@@ -156,14 +156,16 @@ userSchema.statics = {
    * @param {number} limit - Limit number of users to be returned.
    * @returns {Promise<User[]>}
    */
-  list({ page = 1, perPage = 10, name, email }) {
+  list({ page = 1, limit = 10, name, email }) {
     const options = omitBy({ name, email }, isNil);
+
+    page = parseInt(page) || 1;
+    limit = parseInt(limit) || 5;
 
     return this.find(options)
       .sort({ createdAt: -1 })
-      .skip(perPage * (page - 1))
-      .limit(perPage)
-      .exec();
+      .skip(limit * (page - 1))
+      .limit(limit);
   },
 };
 

@@ -17,7 +17,7 @@ const Book = new mongoose.Schema(
     categoryId: {
       required: true,
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Book",
+      ref: "Category",
     },
     author: {
       type: String,
@@ -50,8 +50,8 @@ const Book = new mongoose.Schema(
 Book.statics = {
   list(filterQuery) {
     const options = {};
-    if (filterQuery.title) {
-      options.title = { $regex: filterQuery.title };
+    if (filterQuery.name) {
+      options.title = { $regex: filterQuery.name };
     }
     if (filterQuery.ISBN) {
       options.ISBN = filterQuery.ISBN;

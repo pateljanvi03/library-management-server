@@ -23,7 +23,7 @@ exports.get = async (req, res, next) => {
 
 exports.list = async (req, res, next) => {
   try {
-    const books = await Book.list(req.query);
+    const books = await Book.list(req.query).populate("categoryId", "title");
     return res.json({ books });
   } catch (error) {
     return next(error);

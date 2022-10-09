@@ -24,7 +24,10 @@ exports.get = (req, res, next) => {
 
 exports.list = async (req, res, next) => {
   try {
-    const bookItems = await BookItem.list(req.query);
+    const bookItems = await BookItem.list(req.query).populate(
+      "bookId",
+      "title"
+    );
     return res.json({ bookItems });
   } catch (error) {
     return next(error);

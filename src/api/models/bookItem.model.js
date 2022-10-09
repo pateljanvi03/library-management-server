@@ -22,11 +22,14 @@ const BookItem = new mongoose.Schema(
 BookItem.statics = {
   list(filterQuery) {
     const options = {};
-    if (filterQuery.bookId) {
-      options.bookId = filterQuery.bookId;
-    }
+    // if (filterQuery.bookId) {
+    //   options.bookId = filterQuery.bookId;
+    // }
     if (filterQuery.shelf) {
       options.shelf = filterQuery.shelf;
+    }
+    if (filterQuery.status) {
+      options.status = { $regex: filterQuery.status };
     }
 
     const page = parseInt(filterQuery.page) || 1;

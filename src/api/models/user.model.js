@@ -156,11 +156,18 @@ userSchema.statics = {
    * @param {number} limit - Limit number of users to be returned.
    * @returns {Promise<User[]>}
    */
-  list({ page = 1, limit = 10, name, email }) {
-    const options = omitBy({ name, email }, isNil);
+  list(filterQuery) {
+    const options = {};
 
-    page = parseInt(page) || 1;
-    limit = parseInt(limit) || 5;
+    if (filterQuery.name) {
+      options.name = { $regex: filterQuery.name };
+    }
+    if (filterQuery.username) {
+      options.username = { $regex: filterQuery.username };
+    }
+
+    const page = parseInt(filterQuery.page) || 1;
+    const limit = parseInt(filterQuery.limit) || 5;
 
     return this.find(options)
       .sort({ createdAt: -1 })

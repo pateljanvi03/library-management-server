@@ -16,8 +16,21 @@ const BookItem = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJson: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
   }
 );
+
+BookItem.virtual("book", {
+  ref: "Book",
+  localField: "bookId",
+  foreignField: "_id",
+  justOne: true,
+});
 
 BookItem.statics = {
   list(filterQuery) {

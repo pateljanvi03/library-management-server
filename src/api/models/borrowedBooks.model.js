@@ -38,8 +38,42 @@ const BorrowedBooks = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
   }
 );
+
+BorrowedBooks.virtual("bookItem", {
+  ref: "BookItem",
+  localField: "bookItemId",
+  foreignField: "_id",
+  justOne: true,
+});
+
+BorrowedBooks.virtual("student", {
+  ref: "Student",
+  localField: "studentId",
+  foreignField: "_id",
+  justOne: true,
+});
+
+BorrowedBooks.virtual("issuerUser", {
+  ref: "User",
+  localField: "issuerUserId",
+  foreignField: "_id",
+  justOne: true,
+});
+
+BorrowedBooks.virtual("collecterUser", {
+  ref: "User",
+  localField: "collecterUserId",
+  foreignField: "_id",
+  justOne: true,
+});
 
 BorrowedBooks.statics = {
   list(filterQuery) {

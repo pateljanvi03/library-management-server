@@ -8,8 +8,27 @@ const Category = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toObject: {
+      virtuals: true,
+    },
+    toJSON: {
+      virtuals: true,
+    },
   }
 );
+
+Category.virtual("books", {
+  ref: "Book",
+  localField: "_id",
+  foreignField: "categoryId",
+});
+
+Category.virtual("booksCount", {
+  ref: "Book",
+  localField: "_id",
+  foreignField: "categoryId",
+  count: true,
+});
 
 Category.statics = {
   list(filterQuery) {

@@ -6,7 +6,7 @@ const Student = new mongoose.Schema(
       type: String,
       required: true,
     },
-    branch: {
+    branchId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Branch",
       required: true,
@@ -35,8 +35,21 @@ const Student = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
   }
 );
+
+Student.virtual("branch", {
+  ref: "Branch",
+  localField: "branchId",
+  foreignField: "_id",
+  justOne: true,
+});
 
 Student.statics = {
   list(filterQuery) {
@@ -47,8 +60,8 @@ Student.statics = {
     if (filterQuery.name) {
       options.name = { $regex: filterQuery.name };
     }
-    if (filterQuery.branch) {
-      options.branch = filterQuery.branch;
+    if (filterQuery.branchId) {
+      options.branch = filterQuery.branchId;
     }
     if (filterQuery.batch) {
       options.batch = filterQuery.batch;

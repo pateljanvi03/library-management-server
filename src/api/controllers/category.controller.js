@@ -18,7 +18,7 @@ exports.load = async (req, res, next, id) => {
   }
 };
 
-exports.get = (req, res, next) => {
+exports.get = async (req, res, next) => {
   try {
     res.json({ category: req.category });
   } catch (error) {
@@ -28,7 +28,8 @@ exports.get = (req, res, next) => {
 
 exports.list = async (req, res, next) => {
   try {
-    const categories = await Category.find(req.query);
+    const categories = await Category.find(req.query).populate("booksCount");
+
     return res.json({ categories });
   } catch (error) {
     return next(error);

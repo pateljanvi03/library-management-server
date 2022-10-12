@@ -13,9 +13,11 @@ exports.load = async (req, res, next, id) => {
   }
 };
 
-exports.get = (req, res, next) => {
+exports.get = async (req, res, next) => {
   try {
-    return res.json({ student: req.student });
+    const student = await req.student.populate("branch");
+    console.log(student.branch);
+    return res.json({ student: student });
   } catch (error) {
     return next(error);
   }

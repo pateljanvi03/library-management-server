@@ -30,8 +30,7 @@ exports.create = async (req, res, next) => {
     body.dueDate = dayjs().add(5, "day");
     body.issueDate = dayjs();
     body.status = borrowedBookStatus.BORROWED;
-
-    // @todo - add userId when implement auth middleware
+    body.issuerUserId = req.authUserId;
 
     const borrowedBook = await BorrowedBook.create(body);
     return res.json({ borrowedBook });
@@ -62,9 +61,9 @@ exports.update = async (req, res, next) => {
 
     borrowedBook.status = borrowedBookStatus.RETURNED;
     borrowedBook.returnDate = dayjs();
+    borrowedBook.collecterUserId = req.authUserId;
     await borrowedBook.save();
 
-    // @todo - add userId when implement auth middleware
     // @todo - add logic to calculate fine
 
     return res.json({ borrowedBook });

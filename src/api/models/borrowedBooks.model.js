@@ -11,13 +11,13 @@ const BorrowedBooks = new mongoose.Schema(
       ref: "Student",
     },
     issueDate: {
-      type: String,
+      type: Date,
     },
     dueDate: {
-      type: String,
+      type: Date,
     },
     returnDate: {
-      type: String,
+      type: Date,
     },
     status: {
       type: String,

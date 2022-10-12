@@ -33,6 +33,7 @@ const BorrowedBooks = new mongoose.Schema(
     },
     fineAmount: {
       type: Number,
+      default: 0,
     },
   },
   {

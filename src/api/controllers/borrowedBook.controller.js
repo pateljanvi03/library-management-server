@@ -10,8 +10,21 @@ const borrowedBookStatus = {
 exports.list = async (req, res, next) => {
   try {
     const borrowedBooks = await BorrowedBook.list(req.query)
-      .populate("issuerUserId", "name")
-      .populate("collecterUserId", "name");
+      .populate({
+        path: "bookItemId",
+        populate: {
+          path: "bookId",
+          select: "title",
+        },
+      })
+      .populate({
+        path: "issuerUserId",
+        select: "name",
+      })
+      .populate({
+        path: "collecterUserId",
+        select: "name",
+      });
     return res.json({ borrowedBooks });
   } catch (error) {
     return next(error);
@@ -50,7 +63,7 @@ exports.update = async (req, res, next) => {
 
     const borrowedBook = await BorrowedBook.findOne({
       status: borrowedBookStatus.BORROWED,
-      // studentId: req.body.studentId,
+      //studentId: req.body.studentId,
       bookItemId: req.body.bookItemId,
     });
 

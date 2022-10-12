@@ -8,9 +8,12 @@ const {
   remove,
   load,
 } = require("../../controllers/student.controller");
+const { LOGGED_USER } = require("../../middlewares/auth");
 const { createStudent } = require("../../validations/student.validation");
 
 const router = express.Router();
+
+router.use(LOGGED_USER);
 
 router.param("studentId", load);
 

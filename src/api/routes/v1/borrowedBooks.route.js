@@ -5,12 +5,15 @@ const {
   update,
   list,
 } = require("../../controllers/borrowedBook.controller");
+const { LOGGED_USER } = require("../../middlewares/auth");
 const {
   createBorrowedBook,
   updateBorrowedBook,
 } = require("../../validations/borrowedBooks.validation");
 
 const router = express.Router();
+
+router.use(LOGGED_USER);
 
 router
   .route("/")

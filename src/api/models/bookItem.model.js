@@ -22,9 +22,9 @@ const BookItem = new mongoose.Schema(
 BookItem.statics = {
   list(filterQuery) {
     const options = {};
-    // if (filterQuery.bookId) {
-    //   options.bookId = filterQuery.bookId;
-    // }
+    if (filterQuery.bookId) {
+      options.bookId = filterQuery.bookId;
+    }
     if (filterQuery.shelf) {
       options.shelf = filterQuery.shelf;
     }

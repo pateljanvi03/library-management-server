@@ -8,11 +8,14 @@ const {
   remove,
   load,
 } = require("../../controllers/book.controller");
+const { LOGGED_USER } = require("../../middlewares/auth");
 const { createBook } = require("../../validations/book.validation");
 
 const router = express.Router();
 
 router.param("bookId", load);
+
+router.use(LOGGED_USER);
 
 router.route("/").get(list).post(validate(createBook), create);
 

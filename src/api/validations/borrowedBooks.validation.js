@@ -7,6 +7,6 @@ module.exports = {
   },
   updateBorrowedBook: {
     bookItemId: Joi.string().required(),
-    studentId: Joi.string().required(),
+    //studentId: Joi.string().required(),
   },
 };

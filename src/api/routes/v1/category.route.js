@@ -8,9 +8,12 @@ const {
   remove,
   load,
 } = require("../../controllers/category.controller");
+const { LOGGED_USER } = require("../../middlewares/auth");
 const { createCategory } = require("../../validations/category.validation");
 
 const router = express.Router();
+
+router.use(LOGGED_USER);
 
 router.param("categoryId", load);
 

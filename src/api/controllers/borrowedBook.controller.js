@@ -49,7 +49,7 @@ exports.update = async (req, res, next) => {
 
     const borrowedBook = await BorrowedBook.findOne({
       status: borrowedBookStatus.BORROWED,
-      studentId: req.body.studentId,
+      // studentId: req.body.studentId,
       bookItemId: req.body.bookItemId,
     });
 

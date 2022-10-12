@@ -80,7 +80,7 @@ userSchema.method({
       iat: dayjs().unix(),
       sub: this._id,
     };
-    return jwt.encode(payload, jwtSecret);
+    return jwt.sign(payload, jwtSecret);
   },
 
   async passwordMatches(password) {
@@ -121,14 +121,14 @@ userSchema.statics = {
    * @returns {Promise<User, APIError>}
    */
   async findAndGenerateToken(options) {
-    const { email, password, refreshObject } = options;
-    if (!email) {
+    const { username, password, refreshObject } = options;
+    if (!username) {
       throw new APIError({
-        message: "An email is required to generate a token",
+        message: "A Username is required to generate a token",
       });
     }
 
-    const user = await this.findOne({ email }).exec();
+    const user = await this.findOne({ username }).exec();
     const err = {
       status: httpStatus.UNAUTHORIZED,
     };
@@ -136,15 +136,15 @@ userSchema.statics = {
       if (user && (await user.passwordMatches(password))) {
         return { user, accessToken: user.token() };
       }
-      err.message = "Incorrect email or password";
-    } else if (refreshObject && refreshObject.userEmail === email) {
+      err.message = "Incorrect username or password";
+    } else if (refreshObject && refreshObject.username === username) {
       if (dayjs(refreshObject.expires).isBefore()) {
         err.message = "Invalid refresh token.";
       } else {
         return { user, accessToken: user.token() };
       }
     } else {
-      err.message = "Incorrect email or refreshToken";
+      err.message = "Incorrect username or refreshToken";
     }
     throw new APIError(err);
   },

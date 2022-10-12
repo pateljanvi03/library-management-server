@@ -1,16 +1,16 @@
-const dayjs = require('dayjs');
-const User = require('../models/user.model');
-const RefreshToken = require('../models/refreshToken.model');
-const { jwtExpirationInterval } = require('../../config/vars');
+const dayjs = require("dayjs");
+const User = require("../models/user.model");
+const RefreshToken = require("../models/refreshToken.model");
+const { jwtExpirationInterval } = require("../../config/vars");
 
 /**
  * Returns a formated object with tokens
  * @private
  */
 function generateTokenResponse(user, accessToken) {
-  const tokenType = 'Bearer';
+  const tokenType = "Bearer";
   const refreshToken = RefreshToken.generate(user).token;
-  const expiresIn = dayjs().add(jwtExpirationInterval, 'minutes');
+  const expiresIn = dayjs().add(jwtExpirationInterval, "minutes");
   return {
     tokenType,
     accessToken,
@@ -57,13 +57,13 @@ exports.oAuth = async (req, res, next) => {
  */
 exports.refresh = async (req, res, next) => {
   try {
-    const { email, refreshToken } = req.body;
+    const { username, refreshToken } = req.body;
     const refreshObject = await RefreshToken.findOneAndRemove({
-      userEmail: email,
+      username: username,
       token: refreshToken,
     });
     const { user, accessToken } = await User.findAndGenerateToken({
-      email,
+      username,
       refreshObject,
     });
     const response = generateTokenResponse(user, accessToken);

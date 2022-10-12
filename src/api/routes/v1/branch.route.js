@@ -8,9 +8,12 @@ const {
   remove,
   load,
 } = require("../../controllers/branch.controller");
+const { LOGGED_USER } = require("../../middlewares/auth");
 const { createBranch } = require("../../validations/branch.validation");
 
 const router = express.Router();
+
+router.use(LOGGED_USER);
 
 router.param("branchId", load);
 

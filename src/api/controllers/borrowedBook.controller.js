@@ -9,11 +9,11 @@ const borrowedBookStatus = {
 
 exports.list = async (req, res, next) => {
   try {
-    const borrowedBooks = await BorrowedBook.list(req.query)
+    let borrowedBooks = await BorrowedBook.list(req.query)
       .populate({
         path: "bookItem",
         populate: {
-          path: "bookId",
+          path: "book",
           select: "title",
         },
       })
@@ -25,6 +25,20 @@ exports.list = async (req, res, next) => {
         path: "collecterUser",
         select: "name",
       });
+
+    borrowedBooks = borrowedBooks.map((borrowedBook) => {
+      let data = borrowedBook.toJSON();
+      if (data.bookItem) {
+        data.bookItem = borrowedBook.bookItem.toJSON();
+
+        if (borrowedBook.bookItem.book) {
+          data.bookItem.book = borrowedBook.bookItem.book.toJSON();
+        }
+      }
+
+      return data;
+    });
+
     return res.json({ borrowedBooks });
   } catch (error) {
     return next(error);

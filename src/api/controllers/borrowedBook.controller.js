@@ -11,18 +11,18 @@ exports.list = async (req, res, next) => {
   try {
     const borrowedBooks = await BorrowedBook.list(req.query)
       .populate({
-        path: "bookItemId",
+        path: "bookItem",
         populate: {
           path: "bookId",
           select: "title",
         },
       })
       .populate({
-        path: "issuerUserId",
+        path: "issuerUser",
         select: "name",
       })
       .populate({
-        path: "collecterUserId",
+        path: "collecterUser",
         select: "name",
       });
     return res.json({ borrowedBooks });

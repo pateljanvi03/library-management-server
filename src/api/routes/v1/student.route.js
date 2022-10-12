@@ -13,7 +13,7 @@ const { createStudent } = require("../../validations/student.validation");
 
 const router = express.Router();
 
-// router.use(LOGGED_USER);
+router.use(LOGGED_USER);
 
 router.param("studentId", load);
 

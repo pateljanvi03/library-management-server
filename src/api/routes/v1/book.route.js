@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.param("bookId", load);
 
-//router.use(LOGGED_USER);
+router.use(LOGGED_USER);
 
 router.route("/").get(list).post(validate(createBook), create);
 

@@ -13,7 +13,7 @@ const { createCategory } = require("../../validations/category.validation");
 
 const router = express.Router();
 
-// router.use(LOGGED_USER);
+router.use(LOGGED_USER);
 
 router.param("categoryId", load);
 

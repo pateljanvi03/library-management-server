@@ -9,7 +9,9 @@ const borrowedBookStatus = {
 
 exports.list = async (req, res, next) => {
   try {
-    const borrowedBooks = await BorrowedBook.list(req.query);
+    const borrowedBooks = await BorrowedBook.list(req.query)
+      .populate("issuerUserId", "name")
+      .populate("collecterUserId", "name");
     return res.json({ borrowedBooks });
   } catch (error) {
     return next(error);

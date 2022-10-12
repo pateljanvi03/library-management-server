@@ -16,7 +16,6 @@ exports.load = async (req, res, next, id) => {
 exports.get = async (req, res, next) => {
   try {
     const student = await req.student.populate("branch");
-    console.log(student.branch);
     return res.json({ student: student });
   } catch (error) {
     return next(error);

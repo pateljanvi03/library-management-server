@@ -2,10 +2,11 @@ const Student = require("../models/student.model");
 
 exports.load = async (req, res, next, id) => {
   try {
-    const student = await Student.findById(id);
+    const student = await Student.findById(id).populate("branch");
     if (!student) {
       return next(new Error("invalid id"));
     }
+
     req.student = student;
     return next();
   } catch (error) {
@@ -15,8 +16,7 @@ exports.load = async (req, res, next, id) => {
 
 exports.get = async (req, res, next) => {
   try {
-    const student = await req.student.populate("branch");
-    return res.json({ student: student.toJSON() });
+    return res.json({ student: req.student });
   } catch (error) {
     return next(error);
   }

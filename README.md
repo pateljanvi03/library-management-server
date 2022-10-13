@@ -55,7 +55,7 @@ yarn lint:watch
 
 ## Boilerplate Used from
 
-- [KunalKapadia/express-mongoose-es6-rest-api](https://github.com/danielfsousa/express-rest-boilerplate)
+- [danielfsousa/express-rest-boilerplate](https://github.com/danielfsousa/express-rest-boilerplate)
 
 ## License
 

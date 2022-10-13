@@ -7,6 +7,7 @@ const {
   update,
   remove,
   load,
+  getTotalCount,
 } = require("../../controllers/student.controller");
 const { LOGGED_USER } = require("../../middlewares/auth");
 const { createStudent } = require("../../validations/student.validation");
@@ -18,6 +19,8 @@ router.use(LOGGED_USER);
 router.param("studentId", load);
 
 router.route("/").get(list).post(validate(createStudent), create);
+
+router.route("/stats/total").get(getTotalCount);
 
 router
   .route("/:studentId")

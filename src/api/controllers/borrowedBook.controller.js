@@ -100,3 +100,56 @@ exports.update = async (req, res, next) => {
     return next(error);
   }
 };
+
+exports.getGroupedData = async (req, res, next) => {
+  try {
+    const match = getTimeRangeQuery();
+
+    const result = await BorrowedBook.aggregate([
+      match,
+      {
+        $group: {
+          _id: { $dateToString: { format: "%d-%m-%Y", date: "$createdAt" } },
+          count: {
+            $sum: 1,
+          },
+        },
+      },
+      {
+        $sort: { _id: 1 },
+      },
+    ]);
+
+    let startDate = dayjs().subtract(1, "week").add(1, "day");
+    let graphData = [];
+    for (let index = 0; index < 7; index++) {
+      let indexDate = result.findIndex(
+        (x) => x._id == startDate.format("DD-MM-YYYY")
+      );
+      if (indexDate == -1) {
+        graphData.push({ _id: startDate.format("DD-MM-YYYY"), total: 0 });
+      } else {
+        graphData.push(result[indexDate]);
+      }
+      startDate = startDate.add(1, "day");
+    }
+
+    return res.json({ result: graphData });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+function getTimeRangeQuery() {
+  let endDate = dayjs().add(1, "day");
+  let startDate = dayjs().subtract(1, "week");
+
+  return {
+    $match: {
+      createdAt: {
+        $gte: startDate.toDate(),
+        $lt: endDate.toDate(),
+      },
+    },
+  };
+}

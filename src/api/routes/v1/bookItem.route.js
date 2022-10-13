@@ -7,6 +7,7 @@ const {
   update,
   remove,
   load,
+  getTotalCount,
 } = require("../../controllers/bookItem.controller");
 const { LOGGED_USER } = require("../../middlewares/auth");
 const { createBookItem } = require("../../validations/bookItem.validation");
@@ -18,6 +19,8 @@ router.use(LOGGED_USER);
 router.param("bookItemId", load);
 
 router.route("/").get(list).post(validate(createBookItem), create);
+
+router.route("/stats/total").get(getTotalCount);
 
 router
   .route("/:bookItemId")

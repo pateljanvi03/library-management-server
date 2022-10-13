@@ -57,3 +57,12 @@ exports.remove = async (req, res, next) => {
     return next(error);
   }
 };
+
+exports.getTotalCount = async (req, res, next) => {
+  try {
+    const count = await Student.count();
+    return res.json({ count });
+  } catch (error) {
+    return next(error);
+  }
+};

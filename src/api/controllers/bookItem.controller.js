@@ -68,3 +68,16 @@ exports.remove = async (req, res, next) => {
     return next(error);
   }
 };
+
+exports.getTotalCount = async (req, res, next) => {
+  try {
+    let filter = {};
+    if (req.query.status) {
+      filter.status = req.query.status;
+    }
+    const count = await BookItem.count(filter);
+    return res.json({ count });
+  } catch (error) {
+    return next(error);
+  }
+};
